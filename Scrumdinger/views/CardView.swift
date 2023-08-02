@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-
 struct CardView: View {
     let scrum: DailyScrum
     var body: some View {
-        VStack(alignment: .leading){
-            Text("\(scrum.title)")
+        VStack(alignment: .leading) {
+            Text(scrum.title)
                 .font(.headline)
                 .accessibilityAddTraits(.isHeader)
             Spacer()
@@ -27,7 +26,8 @@ struct CardView: View {
             .font(.caption)
         }
         .padding()
-//        .foregroundColor(scrum.theme.accentColor)
+        .foregroundColor(scrum.theme.accentColor)
+        .background(scrum.theme.mainColor)
     }
 }
 
