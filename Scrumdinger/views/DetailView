@@ -2,11 +2,10 @@
 //  DetailView.swift
 //  Scrumdinger
 //
-//  Created by Houssam Eddine Baba Bendermel on 5/8/2023.
+//  Created by Houssam Eddine Baba Bendermel on 4/8/2023.
 //
 
 import SwiftUI
-
 
 struct DetailView: View {
     let scrum: DailyScrum
@@ -15,14 +14,14 @@ struct DetailView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Meeting Info")) {
-                NavigationLink(destination: MeetingView()) {
+            Section(header: Text("Meeting info")) {
+                NavigationLink (destination: MeetingView()) {
                     Label("Start Meeting", systemImage: "timer")
                         .font(.headline)
                         .foregroundColor(.accentColor)
                 }
                 HStack {
-                    Label("Length", systemImage: "clock")
+                    Label("Lenght", systemImage: "clock")
                     Spacer()
                     Text("\(scrum.lengthInMinutes) minutes")
                 }
@@ -34,7 +33,7 @@ struct DetailView: View {
                         .padding(4)
                         .foregroundColor(scrum.theme.accentColor)
                         .background(scrum.theme.mainColor)
-                        .cornerRadius(10)
+                        .cornerRadius(15)
                 }
                 .accessibilityElement(children: .combine)
             }
@@ -45,33 +44,17 @@ struct DetailView: View {
             }
         }
         .navigationTitle(scrum.title)
-        .toolbar {
-            Button("Edit") {
+        .toolbar{
+            Button("Edit"){
                 isPresentingEditView = true
             }
             .padding()
         }
         .sheet(isPresented: $isPresentingEditView) {
-            NavigationStack {
-                DetailEditView()
-                    .navigationTitle(scrum.title)
-                    .toolbar{
-                        ToolbarItem(placement: .cancellationAction){
-                            Button("Cancel"){
-                                isPresentingEditView = false
-                            }
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") {
-                                isPresentingEditView = false
-                            }
-                        }
-                    }
-            }
+            DetailEditView()
         }
     }
 }
-
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
